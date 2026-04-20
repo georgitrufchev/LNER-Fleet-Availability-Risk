@@ -1,0 +1,274 @@
+<mxfile host="Electron" agent="Mozilla/5.0">
+  <diagram name="Random Forest Architecture" id="rf-diagram">
+    <mxGraphModel dx="3113" dy="2040" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2800" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#1A1A2E;" value="Random Forest — Fleet Availability Risk Classification" vertex="1">
+          <mxGeometry height="40" width="1400" x="700" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#555555;" value="LNER Fleet Performance Dataset   •   2,552 incidents   •   200 decision trees   •   Risk threshold: delay &gt; 12 minutes (75th percentile)" vertex="1">
+          <mxGeometry height="25" width="1400" x="700" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="feat-header" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#666666;" value="INPUT FEATURES" vertex="1">
+          <mxGeometry height="25" width="200" x="40" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;Lag Delay 1&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39;&gt;Previous incident delay (mins)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="40" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;Lag Delay 2&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39;&gt;Delay 2 incidents prior (mins)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="40" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;Root Cause&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39;&gt;Failure type (e.g. MU, MN, M7)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="40" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;Incident Location&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39;&gt;Where fault occurred (e.g. KGX)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="40" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;Primary Mins&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39;&gt;Directly attributed delay&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="40" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;Total Mins&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39;&gt;Full network delay impact&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="40" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;Month&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39;&gt;Seasonal variation&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="40" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="f8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;Day of Week&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39;&gt;Timetable load pattern&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="200" x="40" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="feat-to-ds" edge="1" parent="1" style="curved=1;endArrow=classic;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.5;fontSize=10;fontStyle=2;fontColor=#888888;" value="used for training">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="380" as="sourcePoint" />
+            <mxPoint x="400" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dataset" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=12;arcSize=15;" value="&lt;b style=&#39;font-size:15px&#39;&gt;Fleet Performance Dataset&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#AACCEE&#39; style=&#39;font-size:12px&#39;&gt;2,552 incidents   ·   8 features&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="280" x="370" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="boot-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=2;fontColor=#888888;" value="Bootstrap Sampling&#xa;(random subset per tree)" vertex="1">
+          <mxGeometry height="40" width="200" x="680" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="ds-to-t1" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="190" as="sourcePoint" />
+            <mxPoint x="920" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ds-to-t2" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="190" as="sourcePoint" />
+            <mxPoint x="1720" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ds-to-t3" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="190" as="sourcePoint" />
+            <mxPoint x="2520" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t1-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#1A1A2E;" value="Decision Tree 1" vertex="1">
+          <mxGeometry height="25" width="200" x="820" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-root" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Lag Delay 1 &amp;gt; 12 mins?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#BBDDF8&#39;&gt;Is recent delay above threshold?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="240" x="800" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-l2l" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#3A6EA5;strokeColor=#3A6EA5;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Location = KGX or XNL?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#DDEEFF&#39;&gt;High-traffic hotspot?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="655" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-l2r" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#3A6EA5;strokeColor=#3A6EA5;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Root Cause = MU or MN?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#DDEEFF&#39;&gt;High-impact fault type?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="975" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-r-l2l" edge="1" parent="1" source="t1-root" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;fontSize=10;fontStyle=1;fontColor=#1A7A40;" target="t1-l2l" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-r-l2r" edge="1" parent="1" source="t1-root" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;fontSize=10;fontStyle=1;fontColor=#C41230;" target="t1-l2r" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-leaf-ll" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;⚠ HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.89&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 312&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="570" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-leaf-lr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;⚠ HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.71&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 148&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="720" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-leaf-rl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;⚠ HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.67&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 93&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="990" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-leaf-rr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A7A40;strokeColor=#1A7A40;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;✓ LOW RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.12&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 807&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="1140" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-l2l-ll" edge="1" parent="1" source="t1-l2l" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#1A7A40;" target="t1-leaf-ll" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-l2l-lr" edge="1" parent="1" source="t1-l2l" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#C41230;" target="t1-leaf-lr" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-l2r-rl" edge="1" parent="1" source="t1-l2r" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#1A7A40;" target="t1-leaf-rl" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t1-l2r-rr" edge="1" parent="1" source="t1-l2r" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#C41230;" target="t1-leaf-rr" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#1A1A2E;" value="Decision Tree 2" vertex="1">
+          <mxGeometry height="25" width="200" x="1620" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-root" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Total Mins &amp;gt; 25 mins?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#BBDDF8&#39;&gt;High network-wide impact?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="240" x="1600" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-l2l" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#3A6EA5;strokeColor=#3A6EA5;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Lag Delay 1 &amp;gt; 8 mins?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#DDEEFF&#39;&gt;Recent disruption trend?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="1455" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-l2r" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#3A6EA5;strokeColor=#3A6EA5;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Location = LDS or DON?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#DDEEFF&#39;&gt;Secondary hotspot?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="1775" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-r-l2l" edge="1" parent="1" source="t2-root" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;fontSize=10;fontStyle=1;fontColor=#1A7A40;" target="t2-l2l" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-r-l2r" edge="1" parent="1" source="t2-root" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;fontSize=10;fontStyle=1;fontColor=#C41230;" target="t2-l2r" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-leaf-ll" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;⚠ HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.91&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 287&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="1370" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-leaf-lr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;⚠ HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.62&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 174&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="1520" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-leaf-rl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;⚠ HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.55&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 110&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="1790" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-leaf-rr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A7A40;strokeColor=#1A7A40;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;✓ LOW RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.09&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 789&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="1940" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-l2l-ll" edge="1" parent="1" source="t2-l2l" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#1A7A40;" target="t2-leaf-ll" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-l2l-lr" edge="1" parent="1" source="t2-l2l" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#C41230;" target="t2-leaf-lr" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-l2r-rl" edge="1" parent="1" source="t2-l2r" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#1A7A40;" target="t2-leaf-rl" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t2-l2r-rr" edge="1" parent="1" source="t2-l2r" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#C41230;" target="t2-leaf-rr" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dot1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7F8C8D;strokeColor=#7F8C8D;" value="" vertex="1">
+          <mxGeometry height="10" width="10" x="2100" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="dot2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7F8C8D;strokeColor=#7F8C8D;" value="" vertex="1">
+          <mxGeometry height="10" width="10" x="2120" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="dot3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#7F8C8D;strokeColor=#7F8C8D;" value="" vertex="1">
+          <mxGeometry height="10" width="10" x="2140" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="dots-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2;fontColor=#7F8C8D;" value="198 more trees" vertex="1">
+          <mxGeometry height="20" width="120" x="2065" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#1A1A2E;" value="Decision Tree N   (× 198 additional trees)" vertex="1">
+          <mxGeometry height="25" width="350" x="2345" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-root" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Root Cause = M7 or MD?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#BBDDF8&#39;&gt;Mechanical / door fault?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="100" width="240" x="2400" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-l2l" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#3A6EA5;strokeColor=#3A6EA5;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Lag Delay 1 &amp;gt; 15 mins?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#DDEEFF&#39;&gt;Severe prior delay?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="2255" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-l2r" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#3A6EA5;strokeColor=#3A6EA5;fontColor=#FFFFFF;fontSize=10;" value="&lt;b&gt;Month = Nov / Dec / Jan?&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#DDEEFF&#39;&gt;Peak disruption season?&lt;/font&gt;" vertex="1">
+          <mxGeometry height="90" width="210" x="2575" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-r-l2l" edge="1" parent="1" source="tn-root" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;fontSize=10;fontStyle=1;fontColor=#1A7A40;" target="tn-l2l" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-r-l2r" edge="1" parent="1" source="tn-root" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.3;fontSize=10;fontStyle=1;fontColor=#C41230;" target="tn-l2r" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-leaf-ll" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;⚠ HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.85&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 265&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="2170" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-leaf-lr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A7A40;strokeColor=#1A7A40;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;✓ LOW RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.38&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 195&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="2320" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-leaf-rl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;⚠ HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.60&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 130&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="2590" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-leaf-rr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A7A40;strokeColor=#1A7A40;fontColor=#FFFFFF;fontSize=11;arcSize=20;" value="&lt;b&gt;✓ LOW RISK&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;p = 0.15&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDDDDD&#39; style=&#39;font-size:9px&#39;&gt;n ≈ 765&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="2740" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-l2l-ll" edge="1" parent="1" source="tn-l2l" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#1A7A40;" target="tn-leaf-ll" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-l2l-lr" edge="1" parent="1" source="tn-l2l" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#C41230;" target="tn-leaf-lr" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-l2r-rl" edge="1" parent="1" source="tn-l2r" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#1A7A40;" target="tn-leaf-rl" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tn-l2r-rr" edge="1" parent="1" source="tn-l2r" style="endArrow=none;html=1;rounded=0;strokeColor=#AAAAAA;strokeWidth=1.1;fontSize=9;fontStyle=1;fontColor=#C41230;" target="tn-leaf-rr" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="conv-t1" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeColor=#CCCCCC;strokeWidth=1.1;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="680" as="sourcePoint" />
+            <mxPoint x="920" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conv-t2" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeColor=#CCCCCC;strokeWidth=1.1;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1720" y="680" as="sourcePoint" />
+            <mxPoint x="1720" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conv-tn" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeColor=#CCCCCC;strokeWidth=1.1;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2520" y="680" as="sourcePoint" />
+            <mxPoint x="2520" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conv-horiz" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeColor=#CCCCCC;strokeWidth=1.3;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="770" as="sourcePoint" />
+            <mxPoint x="2520" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conv-to-vote" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeColor=#888888;strokeWidth=1.5;fontSize=10;fontStyle=2;fontColor=#888888;" value="aggregate votes">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1720" y="770" as="sourcePoint" />
+            <mxPoint x="1720" y="820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vote-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2C3E6B;strokeColor=#2C3E6B;fontColor=#FFFFFF;fontSize=11;arcSize=15;" value="&lt;b style=&#39;font-size:15px&#39;&gt;Majority Voting   (200 trees)&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#CCDDFF&#39; style=&#39;font-size:11px&#39;&gt;Each tree votes: High Risk  or  Low Risk&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#AABBDD&#39; style=&#39;font-size:10px&#39;&gt;Final prediction = whichever class gets most votes&lt;/font&gt;" vertex="1">
+          <mxGeometry height="85" width="400" x="1520" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="vote-to-prob" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeColor=#888888;strokeWidth=1.5;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1720" y="905" as="sourcePoint" />
+            <mxPoint x="1720" y="945" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="prob-box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C87D0E;strokeColor=#C87D0E;fontColor=#FFFFFF;fontSize=11;arcSize=15;" value="&lt;b style=&#39;font-size:15px&#39;&gt;Risk Probability Score&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#FFEEBB&#39; style=&#39;font-size:11px&#39;&gt;P(High Risk)  =  0.0 → 1.0     ·     Decision threshold: 0.5&lt;/font&gt;" vertex="1">
+          <mxGeometry height="65" width="360" x="1540" y="945" as="geometry" />
+        </mxCell>
+        <mxCell id="prob-to-low" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeColor=#888888;strokeWidth=1.4;fontSize=11;fontStyle=1;fontColor=#1A7A40;" value="p &lt; 0.5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1605" y="1010" as="sourcePoint" />
+            <mxPoint x="1445" y="1085" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="prob-to-high" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;strokeColor=#888888;strokeWidth=1.4;fontSize=11;fontStyle=1;fontColor=#C41230;" value="p ≥ 0.5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1835" y="1010" as="sourcePoint" />
+            <mxPoint x="1995" y="1085" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="low-risk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A7A40;strokeColor=#1A7A40;fontColor=#FFFFFF;fontSize=11;arcSize=15;" value="&lt;b style=&#39;font-size:15px&#39;&gt;✓  LOW RISK&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#CCFFCC&#39; style=&#39;font-size:11px&#39;&gt;Delay ≤ 12 mins predicted&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#AADDAA&#39; style=&#39;font-size:10px&#39;&gt;Normal operations continue&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="320" x="1245" y="1085" as="geometry" />
+        </mxCell>
+        <mxCell id="high-risk" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C41230;strokeColor=#C41230;fontColor=#FFFFFF;fontSize=11;arcSize=15;" value="&lt;b style=&#39;font-size:15px&#39;&gt;⚠  HIGH RISK&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#FFCCCC&#39; style=&#39;font-size:11px&#39;&gt;Delay &gt; 12 mins predicted&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#DDAAAA&#39; style=&#39;font-size:10px&#39;&gt;Proactive action recommended&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="320" x="1875" y="1085" as="geometry" />
+        </mxCell>
+        <mxCell id="metrics" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECF0F1;strokeColor=#CCCCCC;fontColor=#1A1A2E;fontSize=12;arcSize=15;" value="&lt;b style=&#39;font-size:13px;color:#1A1A2E&#39;&gt;Model Performance  —  Held-Out Test Set   (n = 638 incidents)&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#444444&#39; style=&#39;font-size:12px&#39;&gt;Accuracy: 99.8%     Precision: 100%     Recall: 99.3%     F1 Score: 0.997     AUC-ROC: 1.000&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="1250" x="1095" y="1215" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
